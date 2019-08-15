@@ -32,8 +32,6 @@ docker container rm wso2is
 
 
 ## Deploy
-Before you deploy, you will need a running instance of MariaDB in Kubernetes: https://github.com/ukhc/mariadb-docker
-
 
 Deploy (run these commands from the root folder of this repo)
 ~~~
