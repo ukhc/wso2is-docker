@@ -8,7 +8,6 @@
 
 ~~~
 # start the container
-VERSION=$(cat version)
 docker run --name wso2is -p 9443:9443 -d wso2/wso2is:5.8.0
 
 # see the status
