@@ -76,7 +76,7 @@
 apiVersion: apps/v1beta1
 kind: Deployment
 metadata:
-  name: wso2is-deployment
+  name: wso2is
   labels:
     app: wso2is
 spec:
@@ -90,7 +90,7 @@ spec:
         app: wso2is
     spec:
       containers:
-      - name: wso2is-container
+      - name: wso2is
         image: wso2/wso2is:5.8.0
         #imagePullPolicy: Never
         ports:
