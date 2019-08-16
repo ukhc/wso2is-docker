@@ -1,0 +1,135 @@
+#kind: PersistentVolume
+#apiVersion: v1
+#metadata:
+#  name: wso2is-home
+#spec:
+#  capacity:
+#    storage: 10Gi
+#  accessModes:
+#    - ReadWriteOnce
+#  storageClassName: manual
+#  hostPath:
+#    path: "/Users/steven/Desktop/Kubernetes/persistent-volumes/wso2is-home"
+#---
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+ name: wso2is-conf-volume
+spec:
+ capacity:
+   storage: 1Gi
+ accessModes:
+   - ReadWriteOnce
+ storageClassName: manual
+ hostPath:
+   path: "/Users/steven/Desktop/Kubernetes/persistent-volumes/wso2is-conf"
+---
+#kind: PersistentVolume
+#apiVersion: v1
+#metadata:
+# name: wso2is-conf-datasources-volume
+#spec:
+# capacity:
+#   storage: 1Gi
+# accessModes:
+#   - ReadWriteOnce
+# storageClassName: manual
+# hostPath:
+#   path: "/Users/steven/Desktop/Kubernetes/persistent-volumes/wso2is-conf-datasources"
+#---
+#kind: PersistentVolumeClaim
+#apiVersion: v1
+#metadata:
+#  name: wso2is-home-volume-claim
+#spec:
+#  storageClassName: manual
+#  accessModes:
+#    - ReadWriteOnce
+#  resources:
+#    requests:
+#      storage: 10Gi
+#---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+ name: wso2is-conf-volume-claim
+spec:
+ storageClassName: manual
+ accessModes:
+   - ReadWriteOnce
+ resources:
+   requests:
+     storage: 1Gi
+---
+#kind: PersistentVolumeClaim
+#apiVersion: v1
+#metadata:
+# name: wso2is-conf-datasources-volume-claim
+#spec:
+# storageClassName: manual
+# accessModes:
+#   - ReadWriteOnce
+# resources:
+#   requests:
+#     storage: 1Gi
+#---
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: wso2is-deployment
+  labels:
+    app: wso2is
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: wso2is
+  template:
+    metadata:
+      labels:
+        app: wso2is
+    spec:
+      containers:
+      - name: wso2is-container
+        image: 127.0.0.1:30500/external/wso2/wso2is:5.8.0
+        #imagePullPolicy: Never
+        ports:
+        - containerPort: 9443
+          name: https-servlet
+        - containerPort: 9763
+          name: http-servlet
+        volumeMounts:
+#        - name: wso2is-home-storage
+#          mountPath: /home/wso2carbon
+        - name: wso2is-conf-storage
+          mountPath: /home/wso2carbon/wso2is-5.8.0/repository/conf
+#        - name: wso2is-conf-datasources-storage
+#          mountPath: /home/wso2carbon/wso2is-5.8.0/repository/conf/datasources
+      volumes:
+#      - name: wso2is-home-storage
+#        persistentVolumeClaim:
+#          claimName: wso2is-home-volume-claim
+      - name: wso2is-conf-storage
+        persistentVolumeClaim:
+          claimName: wso2is-conf-volume-claim
+#      - name: wso2is-conf-datasources-storage
+#        persistentVolumeClaim:
+#          claimName: wso2is-conf-datasources-volume-claim
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: wso2is-service
+spec:
+  selector:
+    app: wso2is
+  ports:
+  - name: https-servlet
+    protocol: TCP
+    port: 9443
+    targetPort: 9443
+  - name: http-servlet
+    protocol: TCP
+    port: 9763
+    targetPort: 9763
+  type: LoadBalancer
