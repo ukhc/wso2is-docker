@@ -8,7 +8,7 @@
 
 ~~~
 # start the container
-docker run --name wso2is -p 9443:9443 -d wso2/wso2is:5.8.0
+docker run --name wso2is -p 9763:9763 -p 9443:9443 -p 10389:10389 -d wso2/wso2is:5.8.0
 
 # see the status
 docker container ls
