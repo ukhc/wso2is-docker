@@ -37,17 +37,17 @@
 # hostPath:
 #   path: "/Users/steven/Desktop/Kubernetes/persistent-volumes/wso2is-conf-datasources"
 #---
-kind: PersistentVolumeClaim
-apiVersion: v1
-metadata:
-  name: wso2is-volume-claim
-spec:
-  storageClassName: wso2is-storage
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 10Gi
+#kind: PersistentVolumeClaim
+#apiVersion: v1
+#metadata:
+#  name: wso2is-volume-claim
+#spec:
+#  storageClassName: wso2is-storage
+#  accessModes:
+#    - ReadWriteOnce
+#  resources:
+#    requests:
+#      storage: 10Gi
 ---
 #kind: PersistentVolumeClaim
 #apiVersion: v1
@@ -98,17 +98,17 @@ spec:
           name: https-servlet
         - containerPort: 9763
           name: http-servlet
-        volumeMounts:
-        - name: wso2is-storage
-          mountPath: /home/wso2carbon
+#        volumeMounts:
+#        - name: wso2is-storage
+#          mountPath: /home/wso2carbon
 #        - name: wso2is-conf-storage
 #          mountPath: /home/wso2carbon/wso2is-5.8.0/repository/conf
 #        - name: wso2is-conf-datasources-storage
 #          mountPath: /home/wso2carbon/wso2is-5.8.0/repository/conf/datasources
-      volumes:
-      - name: wso2is-storage
-        persistentVolumeClaim:
-          claimName: wso2is-volume-claim
+#      volumes:
+#      - name: wso2is-storage
+#        persistentVolumeClaim:
+#          claimName: wso2is-volume-claim
 #      - name: wso2is-conf-storage
 #        persistentVolumeClaim:
 #          claimName: wso2is-conf-volume-claim
