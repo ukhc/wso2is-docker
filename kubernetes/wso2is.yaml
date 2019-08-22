@@ -37,18 +37,18 @@
 # hostPath:
 #   path: "/Users/steven/Desktop/Kubernetes/persistent-volumes/wso2is-conf-datasources"
 #---
-#kind: PersistentVolumeClaim
-#apiVersion: v1
-#metadata:
-#  name: wso2is-home-volume-claim
-#spec:
-#  storageClassName: manual
-#  accessModes:
-#    - ReadWriteOnce
-#  resources:
-#    requests:
-#      storage: 10Gi
-#---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: wso2is-volume-claim
+spec:
+  storageClassName: wso2is-storage
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi
+---
 #kind: PersistentVolumeClaim
 #apiVersion: v1
 #metadata:
@@ -98,17 +98,17 @@ spec:
           name: https-servlet
         - containerPort: 9763
           name: http-servlet
-#        volumeMounts:
-#        - name: wso2is-home-storage
-#          mountPath: /home/wso2carbon
+        volumeMounts:
+        - name: wso2is-storage
+          mountPath: /home/wso2carbon
 #        - name: wso2is-conf-storage
 #          mountPath: /home/wso2carbon/wso2is-5.8.0/repository/conf
 #        - name: wso2is-conf-datasources-storage
 #          mountPath: /home/wso2carbon/wso2is-5.8.0/repository/conf/datasources
-#      volumes:
-#      - name: wso2is-home-storage
-#        persistentVolumeClaim:
-#          claimName: wso2is-home-volume-claim
+      volumes:
+      - name: wso2is-storage
+        persistentVolumeClaim:
+          claimName: wso2is-volume-claim
 #      - name: wso2is-conf-storage
 #        persistentVolumeClaim:
 #          claimName: wso2is-conf-volume-claim
@@ -116,20 +116,35 @@ spec:
 #        persistentVolumeClaim:
 #          claimName: wso2is-conf-datasources-volume-claim
 ---
+#apiVersion: v1
+#kind: Service
+#metadata:
+#  name: wso2is
+#spec:
+#  selector:
+#    app: wso2is
+#  ports:
+#  - name: https-servlet
+#    protocol: TCP
+#    port: 9443
+#    targetPort: 9443
+#  - name: http-servlet
+#    protocol: TCP
+#    port: 9763
+#    targetPort: 9763
+#  type: LoadBalancer
+  
 apiVersion: v1
 kind: Service
 metadata:
   name: wso2is
 spec:
   selector:
-    app: wso2is
+    app: registry
+  type: NodePort
   ports:
-  - name: https-servlet
-    protocol: TCP
-    port: 9443
-    targetPort: 9443
   - name: http-servlet
     protocol: TCP
     port: 9763
     targetPort: 9763
-  type: LoadBalancer
+    nodePort: 30763
