@@ -140,7 +140,7 @@ metadata:
   name: wso2is
 spec:
   selector:
-    app: registry
+    app: wso2is
   type: NodePort
   ports:
   - name: http-servlet
