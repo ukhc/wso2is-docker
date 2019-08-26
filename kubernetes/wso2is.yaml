@@ -145,6 +145,6 @@ spec:
   ports:
   - name: http-servlet
     protocol: TCP
-    port: 30763
-    targetPort: 30763
+    port: 9763
+    targetPort: 9763
     nodePort: 30763
