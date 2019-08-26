@@ -101,16 +101,16 @@ spec:
           name: https-servlet
         - containerPort: 9763
           name: http-servlet
-#        volumeMounts:
-#        - name: wso2is-storage
-#          mountPath: /home/wso2carbon
+        volumeMounts:
+        - name: wso2is-storage
+          mountPath: /home/wso2carbon
 #        - name: wso2is-conf-storage
 #          mountPath: /home/wso2carbon/wso2is-5.8.0/repository/conf
 #        - name: wso2is-conf-datasources-storage
 #          mountPath: /home/wso2carbon/wso2is-5.8.0/repository/conf/datasources
-#      volumes:
-#      - name: wso2is-storage
-#        persistentVolumeClaim:
+      volumes:
+      - name: wso2is-storage
+        persistentVolumeClaim:
 #          claimName: wso2is-pv-claim
 #      - name: wso2is-conf-storage
 #        persistentVolumeClaim:
