@@ -37,17 +37,20 @@
 # hostPath:
 #   path: "/Users/steven/Desktop/Kubernetes/persistent-volumes/wso2is-conf-datasources"
 #---
-kind: PersistentVolumeClaim
+
+kind: PersistentVolumeClaim      
 apiVersion: v1
 metadata:
-  name: wso2is-volume-claim
+  name: wso2is-pv-claim
+  labels:
+    app: wso2is
 spec:
   storageClassName: wso2is-storage
   accessModes:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 10Gi
+      storage: 5Gi
 ---
 #kind: PersistentVolumeClaim
 #apiVersion: v1
@@ -108,7 +111,7 @@ spec:
       volumes:
       - name: wso2is-storage
         persistentVolumeClaim:
-          claimName: wso2is-volume-claim
+          claimName: wso2is-pv-claim
 #      - name: wso2is-conf-storage
 #        persistentVolumeClaim:
 #          claimName: wso2is-conf-volume-claim
