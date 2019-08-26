@@ -108,8 +108,6 @@ spec:
 #          mountPath: /home/wso2carbon/wso2is-5.8.0/repository/conf
 #        - name: wso2is-conf-datasources-storage
 #          mountPath: /home/wso2carbon/wso2is-5.8.0/repository/conf/datasources
-      securityContext:
-        fsGroup: 802
       volumes:
       - name: wso2is-storage
         persistentVolumeClaim:
