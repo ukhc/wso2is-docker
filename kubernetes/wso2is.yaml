@@ -1,81 +1,125 @@
-#kind: PersistentVolume
-#apiVersion: v1
-#metadata:
-#  name: wso2is-home
-#spec:
-#  capacity:
-#    storage: 10Gi
-#  accessModes:
-#    - ReadWriteOnce
-#  storageClassName: manual
-#  hostPath:
-#    path: "/Users/steven/Desktop/Kubernetes/persistent-volumes/wso2is-home"
-#---
-#kind: PersistentVolume
-#apiVersion: v1
-#metadata:
-# name: wso2is-conf-volume
-#spec:
-# capacity:
-#   storage: 1Gi
-# accessModes:
-#   - ReadWriteOnce
-# storageClassName: manual
-# hostPath:
-#   path: "/Users/steven/Desktop/Kubernetes/persistent-volumes/wso2is-conf"
-#---
-#kind: PersistentVolume
-#apiVersion: v1
-#metadata:
-# name: wso2is-conf-datasources-volume
-#spec:
-# capacity:
-#   storage: 1Gi
-# accessModes:
-#   - ReadWriteOnce
-# storageClassName: manual
-# hostPath:
-#   path: "/Users/steven/Desktop/Kubernetes/persistent-volumes/wso2is-conf-datasources"
-#---
 
-kind: PersistentVolumeClaim      
 apiVersion: v1
+kind: ConfigMap
 metadata:
-  name: wso2is-pv-claim
-  labels:
-    app: wso2is
-spec:
-  storageClassName: wso2is-storage
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 5Gi
----
-#kind: PersistentVolumeClaim
-#apiVersion: v1
-#metadata:
-# name: wso2is-conf-volume-claim
-#spec:
-# storageClassName: manual
-# accessModes:
-#   - ReadWriteOnce
-# resources:
-#   requests:
-#     storage: 1Gi
-#---
-#kind: PersistentVolumeClaim
-#apiVersion: v1
-#metadata:
-# name: wso2is-conf-datasources-volume-claim
-#spec:
-# storageClassName: manual
-# accessModes:
-#   - ReadWriteOnce
-# resources:
-#   requests:
-#     storage: 1Gi
-#---
+  name: wso2is-conf-datasources
+data:
+  master-datasources.xml: |
+    <datasources-configuration xmlns:svns="http://org.wso2.securevault/configuration">
+        <providers>
+            <provider>org.wso2.carbon.ndatasource.rdbms.RDBMSDataSourceReader</provider>
+        </providers>
+        <datasources>
+            <datasource>
+                <name>WSO2_CARBON_DB</name>
+                <description>The datasource used for registry and user manager</description>
+                <jndiConfig>
+                    <name>jdbc/WSO2CarbonDB</name>
+                </jndiConfig>
+                <definition type="RDBMS">
+                    <configuration>
+                        <url>jdbc:h2:./repository/database/WSO2CARBON_DB;DB_CLOSE_ON_EXIT=FALSE;LOCK_TIMEOUT=60000</url>
+                        <username>wso2carbon</username>
+                        <password>wso2carbon</password>
+                        <driverClassName>org.h2.Driver</driverClassName>
+                        <maxActive>50</maxActive>
+                        <maxWait>60000</maxWait>
+                        <testOnBorrow>true</testOnBorrow>
+                        <validationQuery>SELECT 1</validationQuery>
+                        <validationInterval>30000</validationInterval>
+                        <defaultAutoCommit>false</defaultAutoCommit>
+                    </configuration>
+                </definition>
+            </datasource>
+            <datasource>
+                <name>WSO2_USER_DB</name>
+                <description>The data source used for user management and user store</description>
+                <jndiConfig>
+                    <name>jdbc/WSO2UserDS</name>
+                </jndiConfig>
+                <definition type="RDBMS">
+                    <configuration>
+                        <url>jdbc:mysql://mariadb:3306/WSO2IS_USER_DB?autoReconnect=true&amp;useSSL=false</url>
+                        <username>root</username>
+                        <password>admin</password>
+                        <driverClassName>com.mysql.jdbc.Driver</driverClassName>
+                        <maxActive>80</maxActive>
+                        <maxWait>60000</maxWait>
+                        <minIdle>5</minIdle>
+                        <testOnBorrow>true</testOnBorrow>
+                        <validationQuery>SELECT 1</validationQuery>
+                        <validationInterval>30000</validationInterval>
+                        <defaultAutoCommit>false</defaultAutoCommit>
+                    </configuration>
+                </definition>
+            </datasource>
+            <datasource>
+                <name>WSO2_CONFIG_REG_DB</name>
+                <description>The data source used for config registry</description>
+                <jndiConfig>
+                    <name>jdbc/WSO2ConfigDS</name>
+                </jndiConfig>
+                <definition type="RDBMS">
+                    <configuration>
+                        <url>jdbc:h2:./repository/database/WSO2IS_REG_DB?autoReconnect=true&amp;useSSL=false</url>
+                        <username>wso2carbon</username>
+                        <password>wso2carbon</password>
+                        <driverClassName>org.h2.Driver</driverClassName>
+                        <maxActive>50</maxActive>
+                        <maxWait>60000</maxWait>
+                        <testOnBorrow>true</testOnBorrow>
+                        <validationQuery>SELECT 1</validationQuery>
+                        <validationInterval>30000</validationInterval>
+                    </configuration>
+                </definition>
+            </datasource>
+            <datasource>
+                <name>WSO2_IDENTITY_DB</name>
+                <description>The data source used for identity</description>
+                <jndiConfig>
+                    <name>jdbc/WSO2IdentityDS</name>
+                </jndiConfig>
+                <definition type="RDBMS">
+                    <configuration>
+                        <url>jdbc:mysql://mariadb:3306/WSO2IS_IDENTITY_DB?autoReconnect=true&amp;useSSL=false</url>
+                        <username>root</username>
+                        <password>admin</password>
+                        <driverClassName>com.mysql.jdbc.Driver</driverClassName>
+                        <maxActive>80</maxActive>
+                        <maxWait>60000</maxWait>
+                        <minIdle>5</minIdle>
+                        <testOnBorrow>true</testOnBorrow>
+                        <validationQuery>SELECT 1</validationQuery>
+                        <validationInterval>30000</validationInterval>
+                        <defaultAutoCommit>false</defaultAutoCommit>
+                    </configuration>
+                </definition>
+            </datasource>
+            <datasource>
+                <name>WSO2_CONSENT_DB</name>
+                <description>The data source used for consent management</description>
+                <jndiConfig>
+                    <name>jdbc/WSO2ConsentDS</name>
+                </jndiConfig>
+                <definition type="RDBMS">
+                    <configuration>
+                        <url>jdbc:h2:./repository/database/WSO2IS_CONSENT_DB?autoReconnect=true&amp;useSSL=false</url>
+                        <username>wso2carbon</username>
+                        <password>wso2carbon</password>
+                        <driverClassName>org.h2.Driver</driverClassName>
+                        <maxActive>80</maxActive>
+                        <maxWait>60000</maxWait>
+                        <minIdle>5</minIdle>
+                        <testOnBorrow>true</testOnBorrow>
+                        <validationQuery>SELECT 1</validationQuery>
+                        <validationInterval>30000</validationInterval>
+                        <defaultAutoCommit>false</defaultAutoCommit>
+                    </configuration>
+                </definition>
+            </datasource>
+       </datasources>
+    </datasources-configuration>
+
 
 ---
 
@@ -224,6 +268,8 @@ data:
 
             <!-- Embedded LDAP server specific ports -->
             <EmbeddedLDAP>
+                <!-- Disable the LDAP server when you change the primary user store -->
+                <Property name="enable">true</Property>
                 <!-- Port which embedded LDAP server runs -->
                 <LDAPServerPort>10389</LDAPServerPort>
                 <!-- Port which KDC (Kerberos Key Distribution Center) server runs -->
@@ -839,7 +885,28 @@ spec:
       containers:
       - name: wso2is
         image: wso2/wso2is:5.8.0
-        #imagePullPolicy: Never
+        livenessProbe:
+          exec:
+            command:
+              - /bin/sh
+              - -c
+              - nc -z localhost 9443
+          initialDelaySeconds: 120
+          periodSeconds: 10
+        readinessProbe:
+          exec:
+            command:
+              - /bin/sh
+              - -c
+              - nc -z localhost 9443
+          initialDelaySeconds: 60
+          periodSeconds: 10
+        lifecycle:
+          preStop:
+            exec:
+              command:  ['sh', '-c', '${WSO2_SERVER_HOME}/bin/wso2server.sh stop']
+        securityContext:
+          runAsUser: 802
         ports:
         - containerPort: 9443
           name: https-servlet
@@ -848,46 +915,17 @@ spec:
         volumeMounts:
           - name: wso2is-conf
             mountPath: /home/wso2carbon/wso2-config-volume/repository/conf
-#        volumeMounts:
-#        - name: wso2is-storage
-#          mountPath: /home/wso2carbon
-#        - name: wso2is-conf-storage
-#          mountPath: /home/wso2carbon/wso2is-5.8.0/repository/conf
-#        - name: wso2is-conf-datasources-storage
-#          mountPath: /home/wso2carbon/wso2is-5.8.0/repository/conf/datasources
+          - name: wso2is-conf-datasources
+            mountPath: /home/wso2carbon/wso2-config-volume/repository/conf/datasources
       volumes:
       - name: wso2is-conf
         configMap:
           name: wso2is-conf
-#      volumes:
-#      - name: wso2is-storage
-#        persistentVolumeClaim:
-#          claimName: wso2is-pv-claim
-#      - name: wso2is-conf-storage
-#        persistentVolumeClaim:
-#          claimName: wso2is-conf-volume-claim
-#      - name: wso2is-conf-datasources-storage
-#        persistentVolumeClaim:
-#          claimName: wso2is-conf-datasources-volume-claim
+      - name: wso2is-conf-datasources
+        configMap:
+          name: wso2is-conf-datasources
 ---
-#apiVersion: v1
-#kind: Service
-#metadata:
-#  name: wso2is
-#spec:
-#  selector:
-#    app: wso2is
-#  ports:
-#  - name: https-servlet
-#    protocol: TCP
-#    port: 9443
-#    targetPort: 9443
-#  - name: http-servlet
-#    protocol: TCP
-#    port: 9763
-#    targetPort: 9763
-#  type: LoadBalancer
-  
+
 apiVersion: v1
 kind: Service
 metadata:
@@ -897,8 +935,12 @@ spec:
     app: wso2is
   type: NodePort
   ports:
-  - name: http-servlet
-    protocol: TCP
-    port: 9763
-    targetPort: 9763
-    nodePort: 30763
+    - name: servlet-http
+      port: 9763
+      targetPort: 9763
+      protocol: TCP
+    - name: servlet-https
+      port: 9443
+      targetPort: 9443
+      protocol: TCP
+      nodePort: 30443
