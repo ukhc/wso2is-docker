@@ -33,7 +33,7 @@ do
 			echo "ERROR: timeout waiting for mariadb pod. Exit script!"
 			exit 1
 		else
-			echo "waiting...mariadb pod is not ready...($isPodReadyCount - 100)"
+			echo "waiting...mariadb pod is not ready...($isPodReadyCount...100)"
 			sleep 2
 		fi
 	fi
@@ -64,7 +64,7 @@ do
 			echo "ERROR: timeout waiting for wso2is pod. Exit script!"
 			exit 1
 		else
-			echo "waiting...wso2is pod is not ready...($isPodReadyCount - 100)"
+			echo "waiting...wso2is pod is not ready...($isPodReadyCount...100)"
 			sleep 2
 		fi
 	fi
