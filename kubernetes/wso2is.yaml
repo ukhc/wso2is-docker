@@ -1249,6 +1249,25 @@ spec:
           name: wso2is-conf-tomcat
 ---
 
+#apiVersion: v1
+#kind: Service
+#metadata:
+#  name: wso2is
+#spec:
+#  selector:
+#    app: wso2is
+#  type: NodePort
+#  ports:
+#    - name: servlet-http
+#      port: 9763
+#      targetPort: 9763
+#      protocol: TCP
+#    - name: servlet-https
+#      port: 9443
+#      targetPort: 9443
+#      protocol: TCP
+#      nodePort: 30443
+
 apiVersion: v1
 kind: Service
 metadata:
@@ -1256,7 +1275,7 @@ metadata:
 spec:
   selector:
     app: wso2is
-  type: NodePort
+  type: LoadBalancer
   ports:
     - name: servlet-http
       port: 9763
@@ -1266,4 +1285,3 @@ spec:
       port: 9443
       targetPort: 9443
       protocol: TCP
-      nodePort: 30443
