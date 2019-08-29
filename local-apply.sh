@@ -33,7 +33,7 @@ do
 			echo "ERROR: timeout waiting for mariadb pod. Exit script!"
 			exit 1
 		else
-			echo "waiting...mariadb pod is not ready...($isPodReadyCount...100)"
+			echo "waiting...mariadb pod is not ready...($isPodReadyCount/100)"
 			sleep 2
 		fi
 	fi
@@ -41,10 +41,12 @@ done
 
 ##########################
 
-#echo "init the database...."
-#POD=$(kubectl get pod -l app=mariadb -o jsonpath="{.items[0].metadata.name}")
-#kubectl exec -i $POD -- /usr/bin/mysql -u root -padmin -s < ./sql/initdb.sql
-#kubectl exec -it $POD -- /usr/bin/mysql -u root -padmin -e 'show databases'
+echo "init the database...."
+POD=$(kubectl get pod -l app=mariadb -o jsonpath="{.items[0].metadata.name}")
+kubectl exec -it $POD -- /usr/bin/mysql -u root -padmin -e 'create database WSO2_CARBON_DB'
+kubectl exec -i $POD -- /usr/bin/mysql -u root -padmin -s -DWSO2_CARBON_DB < ./dbscripts/mysql.sql
+kubectl exec -i $POD -- /usr/bin/mysql -u root -padmin -s -DWSO2_CARBON_DB < ./dbscripts/identity/mysql.sql
+kubectl exec -it $POD -- /usr/bin/mysql -u root -padmin -e 'show databases'
 
 ##########################
 
@@ -64,7 +66,7 @@ do
 			echo "ERROR: timeout waiting for wso2is pod. Exit script!"
 			exit 1
 		else
-			echo "waiting...wso2is pod is not ready...($isPodReadyCount...100)"
+			echo "waiting...wso2is pod is not ready...($isPodReadyCount/100)"
 			sleep 2
 		fi
 	fi
