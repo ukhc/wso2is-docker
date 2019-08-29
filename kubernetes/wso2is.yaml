@@ -1171,6 +1171,12 @@ metadata:
     app: wso2is
 spec:
   replicas: 1
+  minReadySeconds: 30
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+    type: RollingUpdate
   selector:
     matchLabels:
       app: wso2is
