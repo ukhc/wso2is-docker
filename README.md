@@ -35,21 +35,12 @@ docker container rm wso2is
 
 Deploy (run these commands from the root folder of this repo)
 ~~~
-mkdir -p /Users/Shared/Kubernetes/persistent-volumes/wso2is
-kubectl apply -f ./kubernetes/wso2is-local-pv.yaml
-kubectl apply -f ./kubernetes/wso2is.yaml
-
-# validation
-kubectl get pods
-
-open http://127.0.0.1
+./local-apply.sh
 ~~~
 
 Note: The default admin password is admin
 
 Delete
 ~~~
-kubectl delete -f ./kubernetes/wso2is.yaml
-kubectl delete -f ./kubernetes/wso2is-local-pv.yaml
-rm -rf /Users/Shared/Kubernetes/persistent-volumes/wso2is
+./local-delete.sh
 ~~~
