@@ -67,6 +67,15 @@ kubectl exec -it $POD -- /usr/bin/mysql -u root -padmin -e 'show databases'
 
 echo "deploy wso2is..."
 kubectl apply -f ./kubernetes/wso2is.yaml
+#rm -f yaml.tmp
+#cp ./kubernetes/wso2is.yaml yaml.tmp
+# port offset to make it 443
+#sed -i '' 's/<Offset>0</<Offset>-9000</' yaml.tmp
+# adjust ports for new offset
+#sed -i '' 's/9443/443/' yaml.tmp
+#sed -i '' 's/9763/763/' yaml.tmp
+#kubectl apply -f yaml.tmp
+#rm -f yaml.tmp
 
 echo "wait for wso2is..."
 sleep 2
