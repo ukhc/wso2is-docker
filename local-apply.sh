@@ -61,6 +61,8 @@ POD=$(kubectl get pod -l app=mariadb -o jsonpath="{.items[0].metadata.name}")
 kubectl exec -it $POD -- /usr/bin/mysql -u root -padmin -e 'create database WSO2_CARBON_DB'
 kubectl exec -i $POD -- /usr/bin/mysql -u root -padmin -s -DWSO2_CARBON_DB < ./dbscripts/mysql.sql
 kubectl exec -i $POD -- /usr/bin/mysql -u root -padmin -s -DWSO2_CARBON_DB < ./dbscripts/identity/mysql.sql
+kubectl exec -i $POD -- /usr/bin/mysql -u root -padmin -s -DWSO2_CARBON_DB < ./dbscripts/consent/mysql.sql
+kubectl exec -i $POD -- /usr/bin/mysql -u root -padmin -s -DWSO2_CARBON_DB < ./dbscripts/metrics/mysql.sql
 kubectl exec -it $POD -- /usr/bin/mysql -u root -padmin -e 'show databases'
 
 ##########################
