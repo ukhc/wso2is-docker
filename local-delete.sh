@@ -23,7 +23,7 @@ kubectl delete -f https://raw.githubusercontent.com/ukhc/mariadb-docker/kub-1/ku
 
 echo "delete the persistent volume for mariadb...."
 kubectl delete -f https://raw.githubusercontent.com/ukhc/mariadb-docker/qa/kubernetes/mariadb-single-local-pv.yaml
-#rm -rf /Users/Shared/Kubernetes/persistent-volumes/mariadb
+rm -rf /Users/Shared/Kubernetes/persistent-volumes/mariadb
 
 ##########################
 
