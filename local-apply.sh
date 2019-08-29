@@ -92,7 +92,7 @@ done
 echo "opening the browser..."
 echo "username: admin"
 echo "password: admin"
-open https://127.0.0.1:30443
+open https://127.0.0.1:9443
 
 ##########################
 
