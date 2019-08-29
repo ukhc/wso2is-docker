@@ -1235,8 +1235,8 @@ spec:
             mountPath: /home/wso2carbon/wso2-config-volume/repository/conf
           - name: wso2is-conf-datasources
             mountPath: /home/wso2carbon/wso2-config-volume/repository/conf/datasources
-          - name: wso2is-conf-tomcat
-            mountPath: /home/wso2carbon/wso2-config-volume/repository/conf/tomcat
+          #- name: wso2is-conf-tomcat
+          #  mountPath: /home/wso2carbon/wso2-config-volume/repository/conf/tomcat
       volumes:
       - name: wso2is-conf
         configMap:
