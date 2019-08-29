@@ -65,17 +65,23 @@ kubectl exec -it $POD -- /usr/bin/mysql -u root -padmin -e 'show databases'
 
 ##########################
 
+echo
+echo "#################################"
+echo "##  ADDING DNS TO /ETC/HOSTS   ##"
+echo "##             ---             ##"
+echo "## If you are prompted for a   ##"
+echo "## password, use your local    ##"
+echo "## account password.           ##"
+echo "#################################"
+echo
+
+# add dns
+sudo -- sh -c "echo 127.0.0.1 wso2is  >> /etc/hosts"
+
+##########################
+
 echo "deploy wso2is..."
 kubectl apply -f ./kubernetes/wso2is.yaml
-#rm -f yaml.tmp
-#cp ./kubernetes/wso2is.yaml yaml.tmp
-# port offset to make it 443
-#sed -i '' 's/<Offset>0</<Offset>-9000</' yaml.tmp
-# adjust ports for new offset
-#sed -i '' 's/9443/443/' yaml.tmp
-#sed -i '' 's/9763/763/' yaml.tmp
-#kubectl apply -f yaml.tmp
-#rm -f yaml.tmp
 
 echo "wait for wso2is..."
 sleep 2
@@ -101,7 +107,7 @@ done
 echo "opening the browser..."
 echo "username: admin"
 echo "password: admin"
-open https://127.0.0.1:9443
+open https://wso2is:9443
 
 ##########################
 
