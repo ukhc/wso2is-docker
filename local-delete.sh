@@ -31,21 +31,6 @@ kubectl delete -f ./kubernetes/wso2is.yaml
 
 ##########################
 
-echo
-echo "#####################################"
-echo "##  REMOVE ENTRY FROM /ETC/HOSTS   ##"
-echo "##               ---               ##"
-echo "##    If you are prompted for a    ##"
-echo "##    password, use your local     ##"
-echo "##    account password.            ##"
-echo "#####################################"
-echo
-
-# remove dns
-sudo sed -ie "\|^127.0.0.1 wso2is\$|d" /etc/hosts
-
-##########################
-
 echo "delete mariadb...."
 kubectl delete -f https://raw.githubusercontent.com/ukhc/mariadb-docker/kub-1/kubernetes/mariadb-single.yaml
 
