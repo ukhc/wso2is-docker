@@ -67,6 +67,21 @@ kubectl exec -it $POD -- /usr/bin/mysql -u root -padmin -e 'show databases'
 
 ##########################
 
+echo
+echo "#################################"
+echo "##  ADDING DNS TO /ETC/HOSTS   ##"
+echo "##             ---             ##"
+echo "## If you are prompted for a   ##"
+echo "## password, use your local    ##"
+echo "## account password.           ##"
+echo "#################################"
+echo
+
+# add dns
+sudo -- sh -c "echo 127.0.0.1 wso2is  >> /etc/hosts"
+
+##########################
+
 echo "deploy conf configmap..."
 kubectl apply -f ./kubernetes/wso2is-configmap-conf.yaml
 
@@ -109,7 +124,7 @@ done
 echo "opening the browser..."
 echo "username: admin"
 echo "password: admin"
-open https://127.0.0.1:9443
+open https://wso2is:9443
 
 ##########################
 

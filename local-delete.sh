@@ -57,4 +57,18 @@ rm -rf /Users/Shared/Kubernetes/persistent-volumes/default/mariadb
 
 ##########################
 
+echo
+echo "#####################################"
+echo "##  REMOVE ENTRY FROM /ETC/HOSTS   ##"
+echo "##               ---               ##"
+echo "##    If you are prompted for a    ##"
+echo "##    password, use your local     ##"
+echo "##    account password.            ##"
+echo "#####################################"
+echo
+
+sudo sed -ie "\|^127.0.0.1 wso2is\$|d" /etc/hosts
+
+##########################
+
 echo "...done"
