@@ -71,8 +71,8 @@ spec:
             mountPath: /home/wso2carbon/wso2-config-volume/repository/conf
           - name: wso2is-conf-datasources
             mountPath: /home/wso2carbon/wso2-config-volume/repository/conf/datasources
-#conf-identity#          - name: wso2is-conf-identity
-#conf-identity#            mountPath: /home/wso2carbon/wso2-config-volume/repository/conf/identity
+          - name: wso2is-conf-identity
+            mountPath: /home/wso2carbon/wso2-config-volume/repository/conf/identity
 #repository-resources-security#          - name: wso2is-repository-resources-security
 #repository-resources-security#            mountPath: /home/wso2carbon/wso2-config-volume/repository/resources/security/wso2carbon.jks
 #repository-resources-security#            subPath: wso2carbon.jks
@@ -83,9 +83,9 @@ spec:
       - name: wso2is-conf-datasources
         configMap:
           name: wso2is-conf-datasources
-#conf-identity#      - name: wso2is-conf-identity
-#conf-identity#        configMap:
-#conf-identity#          name: wso2is-conf-identity
+      - name: wso2is-conf-identity
+        configMap:
+          name: wso2is-conf-identity
 #repository-resources-security#      - name: wso2is-repository-resources-security
 #repository-resources-security#        configMap: 
 #repository-resources-security#          name: wso2is-repository-resources-security

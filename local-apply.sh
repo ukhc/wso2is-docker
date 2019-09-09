@@ -72,8 +72,13 @@ kubectl apply -f ./kubernetes/wso2is-configmap-conf.yaml
 
 ##########################
 
-echo "deploy datasources configmap..."
+echo "deploy conf datasources configmap..."
 kubectl apply -f ./kubernetes/wso2is-configmap-conf-datasources.yaml
+
+##########################
+
+echo "deploy conf identity configmap..."
+kubectl apply -f ./kubernetes/wso2is-configmap-conf-identity.yaml
 
 ##########################
 

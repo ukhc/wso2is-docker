@@ -31,8 +31,13 @@ kubectl delete -f ./kubernetes/wso2is-configmap-conf.yaml
 
 ##########################
 
-echo "delete datasources configmap..."
+echo "delete conf datasources configmap..."
 kubectl delete -f ./kubernetes/wso2is-configmap-conf-datasources.yaml
+
+##########################
+
+echo "delete conf identity configmap..."
+kubectl delete -f ./kubernetes/wso2is-configmap-conf-identity.yaml
 
 ##########################
 
