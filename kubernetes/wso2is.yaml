@@ -1121,9 +1121,9 @@ spec:
             mountPath: /home/wso2carbon/wso2-config-volume/repository/conf
           - name: wso2is-conf-datasources
             mountPath: /home/wso2carbon/wso2-config-volume/repository/conf/datasources
-          #- name: wso2is-repository-resources-security
-            #mountPath: /home/wso2carbon/wso2-config-volume/repository/resources/security/wso2carbon.jks
-            #subPath: wso2carbon.jks
+#repository-resources-security#          - name: wso2is-repository-resources-security
+#repository-resources-security#            mountPath: /home/wso2carbon/wso2-config-volume/repository/resources/security/wso2carbon.jks
+#repository-resources-security#            subPath: wso2carbon.jks
       volumes:
       - name: wso2is-conf
         configMap:
@@ -1131,9 +1131,9 @@ spec:
       - name: wso2is-conf-datasources
         configMap:
           name: wso2is-conf-datasources
-      #- name: wso2is-repository-resources-security
-        #configMap: 
-          #name: wso2is-repository-resources-security
+#repository-resources-security#      - name: wso2is-repository-resources-security
+#repository-resources-security#        configMap: 
+#repository-resources-security#          name: wso2is-repository-resources-security
 
 ---
 
