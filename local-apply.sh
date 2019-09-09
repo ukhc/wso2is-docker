@@ -27,13 +27,13 @@ fi
 ##########################
 
 echo "setup the persistent volume for mariadb...."
-mkdir -p /Users/Shared/Kubernetes/persistent-volumes/mariadb
-kubectl apply -f https://raw.githubusercontent.com/ukhc/mariadb-docker/qa/kubernetes/mariadb-single-local-pv.yaml
+mkdir -p /Users/Shared/Kubernetes/persistent-volumes/default/mariadb
+kubectl apply -f https://raw.githubusercontent.com/ukhc/mariadb-docker/master/kubernetes/mariadb-single-local-pv.yaml
 
 ##########################
 
 echo "deploy mariadb...."
-kubectl apply -f https://raw.githubusercontent.com/ukhc/mariadb-docker/kub-1/kubernetes/mariadb-single.yaml
+kubectl apply -f https://raw.githubusercontent.com/ukhc/mariadb-docker/master/kubernetes/mariadb-single.yaml
 
 echo "wait for mariadb..."
 sleep 2
