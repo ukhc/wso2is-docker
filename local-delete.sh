@@ -26,6 +26,16 @@ fi
 
 ##########################
 
+echo "delete conf configmap..."
+kubectl delete -f ./kubernetes/wso2is-configmap-conf.yaml
+
+##########################
+
+echo "delete datasources configmap..."
+kubectl delete -f ./kubernetes/wso2is-configmap-conf-datasources.yaml
+
+##########################
+
 echo "delete wso2is..."
 kubectl delete -f ./kubernetes/wso2is.yaml
 
