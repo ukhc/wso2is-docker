@@ -56,20 +56,14 @@ done
 
 ##########################
 
-#### Use the '--with-db-init' parameter to initialize the database ####
-if [ "$1" == "--with-db-init" ]
-then
-    echo "--with-db-init parameter was used, initializing the database..."
-	POD=$(kubectl get pod -l app=mariadb -o jsonpath="{.items[0].metadata.name}")
-	kubectl exec -it $POD -- /usr/bin/mysql -u root -padmin -e 'create database WSO2_CARBON_DB'
-	kubectl exec -i $POD -- /usr/bin/mysql -u root -padmin -s -DWSO2_CARBON_DB < ./dbscripts/mysql.sql
-	kubectl exec -i $POD -- /usr/bin/mysql -u root -padmin -s -DWSO2_CARBON_DB < ./dbscripts/identity/mysql.sql
-	kubectl exec -i $POD -- /usr/bin/mysql -u root -padmin -s -DWSO2_CARBON_DB < ./dbscripts/consent/mysql.sql
-	kubectl exec -i $POD -- /usr/bin/mysql -u root -padmin -s -DWSO2_CARBON_DB < ./dbscripts/metrics/mysql.sql
-	kubectl exec -it $POD -- /usr/bin/mysql -u root -padmin -e 'show databases'
-else
-    echo "--with-db-init parameter was not used, will not initialize the database..."
-fi
+echo "initializing the database..."
+POD=$(kubectl get pod -l app=mariadb -o jsonpath="{.items[0].metadata.name}")
+kubectl exec -it $POD -- /usr/bin/mysql -u root -padmin -e 'create database WSO2_CARBON_DB'
+kubectl exec -i $POD -- /usr/bin/mysql -u root -padmin -s -DWSO2_CARBON_DB < ./dbscripts/mysql.sql
+kubectl exec -i $POD -- /usr/bin/mysql -u root -padmin -s -DWSO2_CARBON_DB < ./dbscripts/identity/mysql.sql
+kubectl exec -i $POD -- /usr/bin/mysql -u root -padmin -s -DWSO2_CARBON_DB < ./dbscripts/consent/mysql.sql
+kubectl exec -i $POD -- /usr/bin/mysql -u root -padmin -s -DWSO2_CARBON_DB < ./dbscripts/metrics/mysql.sql
+kubectl exec -it $POD -- /usr/bin/mysql -u root -padmin -e 'show databases'
 
 ##########################
 
