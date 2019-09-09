@@ -43,13 +43,13 @@ NOTE: Run the following commands from the root folder of this repo.
 
 ### Deploy a new WSO2is along with a MariaDB that has an initialized WSO2_CARBON_DB database
 ~~~
-./local-apply.sh --with-db-init
+./local-apply.sh
 ~~~
 
 Note: The default admin password is admin
 
 
-Use this to do the initial installation and configuration for MediaWiki.  Once you are satisfied with the setup, you can back it up.
+Use this to do the initial installation and configuration for WSO2is.  Once you are satisfied with the setup, you can back it up.  
 
 
 ### Create a backup of the persistent volume and database
