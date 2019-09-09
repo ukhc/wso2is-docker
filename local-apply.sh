@@ -67,6 +67,16 @@ kubectl exec -it $POD -- /usr/bin/mysql -u root -padmin -e 'show databases'
 
 ##########################
 
+echo "deploy conf configmap..."
+kubectl apply -f ./kubernetes/wso2is-configmap-conf.yaml
+
+##########################
+
+echo "deploy datasources configmap..."
+kubectl apply -f ./kubernetes/wso2is-configmap-conf-datasources.yaml
+
+##########################
+
 echo "deploy wso2is..."
 kubectl apply -f ./kubernetes/wso2is.yaml
 
