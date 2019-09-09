@@ -32,12 +32,12 @@ kubectl delete -f ./kubernetes/wso2is.yaml
 ##########################
 
 echo "delete mariadb...."
-kubectl delete -f https://raw.githubusercontent.com/ukhc/mariadb-docker/kub-1/kubernetes/mariadb-single.yaml
+kubectl delete -f https://raw.githubusercontent.com/ukhc/mariadb-docker/master/kubernetes/mariadb-single.yaml
 
 ##########################
 
 echo "delete the persistent volume for mariadb...."
-kubectl delete -f https://raw.githubusercontent.com/ukhc/mariadb-docker/qa/kubernetes/mariadb-single-local-pv.yaml
+kubectl delete -f https://raw.githubusercontent.com/ukhc/mariadb-docker/master/kubernetes/mariadb-single-local-pv.yaml
 rm -rf /Users/Shared/Kubernetes/persistent-volumes/mariadb
 
 ##########################
