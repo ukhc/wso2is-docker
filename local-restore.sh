@@ -68,6 +68,8 @@ kubectl exec -i $POD -- /usr/bin/mysql -u root -padmin WSO2_CARBON_DB < ./backup
 
 echo "restart the wso2is deployment..."
 kubectl scale --replicas=0 deployment wso2is
+echo "wait a moment..."
+sleep 5
 kubectl scale --replicas=1 deployment wso2is
 
 ##########################
