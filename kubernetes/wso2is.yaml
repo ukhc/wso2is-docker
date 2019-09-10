@@ -100,7 +100,7 @@ spec:
   selector:
     app: wso2is
   type: LoadBalancer
-#loadBalancerIp#  loadBalancerIP: 0.0.0.0
+#loadBalancerIP#  loadBalancerIP: 0.0.0.0
   ports:
     - name: servlet-http
       port: 9763
