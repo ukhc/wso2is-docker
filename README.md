@@ -88,3 +88,15 @@ Some changes may require a restart of the containers.  This script will do that 
 ~~~
 kubectl scale --replicas=4 deployment/wso2is
 ~~~
+
+
+### Shell into the container
+~~~
+./local-shell-wso2is.sh
+~~~
+
+
+### Get the logs from the container
+~~~
+./local-logs-wso2is.sh
+~~~
