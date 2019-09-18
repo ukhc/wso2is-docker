@@ -66,6 +66,9 @@ spec:
           name: https-servlet
         - containerPort: 9763
           name: http-servlet
+#env#        env:
+#java_opts#        - name: JAVA_OPTS
+#java_opts#          value: -Djava.util.prefs.systemRoot=/home/wso2carbon/.java -Djava.util.prefs.userRoot=/home/wso2carbon/.java/.userPrefs
         volumeMounts:
           - name: wso2is-conf
             mountPath: /home/wso2carbon/wso2-config-volume/repository/conf
