@@ -570,7 +570,7 @@ data:
     
         <Consent>
             <!--Specify whether consent management should be enable during SSO.-->
-            <EnableSSOConsentManagement>true</EnableSSOConsentManagement>
+            <EnableSSOConsentManagement>false</EnableSSOConsentManagement>
         </Consent>
     
         <SecurityTokenService>
